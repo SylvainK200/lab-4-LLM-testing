@@ -34,3 +34,12 @@ def test_separate_paren_groups():# pragma: no cover
         '()', '(())', '((()))', '(((())))'
     ]# pragma: no cover
 
+
+# Added test cases
+def test_separate_fake_groups():
+    assert separate_paren_groups('(())())') == ['(())', '()']
+    assert separate_paren_groups('(()') == []
+
+def test_separate_uni_groups():
+    assert separate_paren_groups(')') == []
+    assert separate_paren_groups('(') == []

@@ -31,3 +31,9 @@ def test_find_closest_elements():# pragma: no cover
     assert find_closest_elements([1.0, 2.0, 5.9, 4.0, 5.0]) == (5.0, 5.9)# pragma: no cover
 
 
+# Added test cases
+def test_find_first_closest():
+    assert find_closest_elements([1.0,1.1,0.9,0.8]) == (1,1.1)
+
+def test_last_first_closest():
+    assert find_closest_elements([1.0,1.2,0.9,0.8]) == (0.9, 0.8)
