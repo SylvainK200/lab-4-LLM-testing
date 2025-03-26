@@ -72,5 +72,5 @@ class TestFileNameCheckFunction(unittest.TestCase):
         expected = 'No'
         self.assertEqual(file_name_check(file_name), expected)
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+#     unittest.main()

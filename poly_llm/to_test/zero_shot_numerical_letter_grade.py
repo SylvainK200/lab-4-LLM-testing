@@ -136,5 +136,5 @@ class TestNumericalLetterGradeFunction(unittest.TestCase):
         expected = ['E']
         self.assertEqual(numerical_letter_grade(grades), expected)
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+#     unittest.main()

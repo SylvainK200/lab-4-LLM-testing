@@ -35,16 +35,6 @@ class TestSeparateParenGroupsFunction(unittest.TestCase):
         expected = ['()', '(())', '(()())']
         self.assertEqual(separate_paren_groups(paren_string), expected)
 
-    def test_separate_paren_groups_nested_groups(self):
-        paren_string = '(()()) ((())) () ((())()())'
-        expected = ['(()())', '((()))', '()', '((())()())']
-        self.assertEqual(separate_paren_groups(paren_string), expected)
-
-    def test_separate_paren_groups_multiple_groups(self):
-        paren_string = '() (()) ((())) (((())))'
-        expected = ['()', '(())', '((()))', '(((())))']
-        self.assertEqual(separate_paren_groups(paren_string), expected)
-
     def test_separate_paren_groups_empty_string(self):
         paren_string = ''
         expected = []
@@ -53,6 +43,16 @@ class TestSeparateParenGroupsFunction(unittest.TestCase):
     def test_separate_paren_groups_single_group(self):
         paren_string = '( )'
         expected = ['()']
+        self.assertEqual(separate_paren_groups(paren_string), expected)
+
+    def test_separate_paren_groups_multiple_groups(self):
+        paren_string = '( ) (( )) (( )( ))'
+        expected = ['()', '(())', '(()())']
+        self.assertEqual(separate_paren_groups(paren_string), expected)
+
+    def test_separate_paren_groups_nested_groups(self):
+        paren_string = '( () ) (( () ))'
+        expected = ['(())', '((()))']
         self.assertEqual(separate_paren_groups(paren_string), expected)
 
     def test_separate_paren_groups_spaces(self):
@@ -70,5 +70,15 @@ class TestSeparateParenGroupsFunction(unittest.TestCase):
         expected = []
         self.assertEqual(separate_paren_groups(paren_string), expected)
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_separate_paren_groups_single_parenthesis(self):
+        paren_string = '('
+        with self.assertRaises(ValueError):
+            separate_paren_groups(paren_string)
+
+    def test_separate_paren_groups_multiple_single_parentheses(self):
+        paren_string = '('
+        with self.assertRaises(ValueError):
+            separate_paren_groups(paren_string)
+
+# if __name__ == '__main__':
+#     unittest.main()

@@ -1,5 +1,6 @@
 import unittest
 
+
 def closest_integer(value):
     '''
     Create a function that takes a value (string) representing a number
@@ -19,7 +20,7 @@ def closest_integer(value):
             value = value[:-1]
 
     num = float(value)
-    if value.count('.') > 0 and value.split('.')[1] == '5':
+    if value[-2:] == '.5':
         if num > 0:
             res = ceil(num)
         else:
@@ -30,7 +31,6 @@ def closest_integer(value):
         res = 0
 
     return res
-
 
 class TestClosestIntegerFunction(unittest.TestCase):
 
@@ -79,5 +79,5 @@ class TestClosestIntegerFunction(unittest.TestCase):
         with self.assertRaises(ValueError):
             closest_integer(value)
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+#     unittest.main()
