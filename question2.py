@@ -9,7 +9,7 @@ import json
 from poly_llm.to_test.separate_paren_groups import separate_paren_groups, test_separate_fake_groups, test_separate_uni_groups, test_separate_paren_groups
 from poly_llm.to_test.file_name_check import file_name_check, test_file_name_check, test_bad_format_name_check, test_good_format_name_check
 from poly_llm.to_test.closest_integer import closest_integer, test_closest_integer,test_closest_sup_integer, test_closest_lower_integer
-from poly_llm.to_test.numerical_letter_grade import numerical_letter_grade, test_numerical_letter_grade_frontier, test_numerical_letter_grade_frontier,test_numerical_letter_neg
+from poly_llm.to_test.numerical_letter_grade import numerical_letter_grade, test_numerical_letter_grade, test_numerical_letter_grade_frontier,test_numerical_letter_neg
 from poly_llm.to_test.find_closest_elements import find_closest_elements, test_find_closest_elements, test_find_first_closest, test_last_first_closest
 import inspect
 
@@ -31,10 +31,16 @@ def extract_few_shot(test_example):
   lines = ''.join(lines)
   return lines
 
-
-functions_to_test = [file_name_check, separate_paren_groups, closest_integer, numerical_letter_grade, find_closest_elements ]
-for func in functions_to_test:
-  test, test_name = test_function(func)
-  f = open(f"./question_2_2/{test_name}.py", "w")
-  f.write(test)
-  f.close()
+function_to_test = [separate_paren_groups, file_name_check, closest_integer, numerical_letter_grade, find_closest_elements]
+few_shot_examples  = [(test_separate_fake_groups, test_separate_uni_groups, test_separate_paren_groups),
+                      (test_file_name_check, test_bad_format_name_check, test_good_format_name_check),
+                      (test_closest_integer,test_closest_sup_integer, test_closest_lower_integer),
+                      (test_numerical_letter_grade, test_numerical_letter_grade_frontier,test_numerical_letter_neg),
+                      (test_find_closest_elements, test_find_first_closest, test_last_first_closest)]
+for i in range(len(few_shot_examples)):
+  for j in range(3):
+    few_shot  = [extract_few_shot(few_shot_examples[i][j]), extract_few_shot(few_shot_examples[i][(j+1)%3])]
+    test, test_name = test_function(function_to_test[i], examples = few_shot)
+    f = open(f"./question_2_4/{test_name}_{j}.py", "w")
+    f.write(test)
+    f.close()
